@@ -138,7 +138,9 @@ class TransformerEncoder(BaseModule):
 
         # Multi-head attention
         res = x
+        # save_tensor(x, "/home/sebastian/Documents/Uni/Masterarbeit/code/ml-cvnets/", "input_debug.l3_prenorm_0.bin")
         x = self.pre_norm_mha[0](x)  # norm
+        # save_tensor(x, "/home/sebastian/Documents/Uni/Masterarbeit/code/ml-cvnets/", "output_debug.bin")
         x = self.pre_norm_mha[1](
             x_q=x,
             x_kv=x_prev,
