@@ -15,7 +15,8 @@ def save_tensor_to_hpp(x: Tensor, array_name: str, data_path, filename):
     arr_len = int(list(x_flat.shape)[0])
     header_text_top = "#ifndef MVIT_{}\n".format(array_name.upper())
     header_text_top += "#define MVIT_{}\n\n".format(array_name.upper())
-    header_text_top += "{}[{}] = {{\n".format(array_name, arr_len)
+    header_text_top += "namespace MVIT {\n\n"
+    header_text_top += "float {}[{}] = {{\n".format(array_name, arr_len)
     
     with open(data_path + filename, "wt") as fp:
         cnt = 1
@@ -27,4 +28,4 @@ def save_tensor_to_hpp(x: Tensor, array_name: str, data_path, filename):
             fp.write("{}, ".format(date.item()))
             cnt += 1
             
-        fp.write("\n}\n\n#endif")
+        fp.write("\n};\n\n} // namespace MVIT\n\n#endif")
