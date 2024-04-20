@@ -21,6 +21,7 @@ from cvnets.layers import (
 from cvnets.layers.activation import build_activation_layer
 from cvnets.modules import BaseModule
 from utils import logger
+from utils.save_tensor import save_tensor_to_hpp
 
 
 class TransformerEncoder(BaseModule):
@@ -138,9 +139,9 @@ class TransformerEncoder(BaseModule):
 
         # Multi-head attention
         res = x
-        # save_tensor(x, "/home/sebastian/Documents/Uni/Masterarbeit/code/ml-cvnets/", "input_debug.l3_prenorm_0.bin")
+        save_tensor_to_hpp(x, "", "input_debug.l3_prenorm_0.hpp", "input")
         x = self.pre_norm_mha[0](x)  # norm
-        # save_tensor(x, "/home/sebastian/Documents/Uni/Masterarbeit/code/ml-cvnets/", "output_debug.bin")
+        save_tensor_to_hpp(x, "", "output_debug.l3_prenorm_0.hpp", "output")
         x = self.pre_norm_mha[1](
             x_q=x,
             x_kv=x_prev,

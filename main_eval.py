@@ -153,6 +153,6 @@ def main_worker_detection(args: Optional[List[str]] = None, **kwargs):
 
 
 if __name__ == "__main__":
-    # main_worker()
-    main_worker_segmentation()
+    main_worker()
+    # main_worker_segmentation()
     # main_worker_detection()
