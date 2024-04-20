@@ -10,7 +10,7 @@ def save_tensor(x: Tensor, data_path, filename):
             fp.write(struct.pack("f", date.item()))
     print("data written to", data_path + filename)
     
-def save_tensor_to_hpp(x: Tensor, array_name: str, data_path, filename):
+def save_tensor_to_hpp(x: Tensor, data_path: str, filename: str, array_name: str):
     x_flat = x.flatten()
     arr_len = int(list(x_flat.shape)[0])
     header_text_top = "#ifndef MVIT_{}\n".format(array_name.upper())
