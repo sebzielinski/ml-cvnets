@@ -2,18 +2,18 @@ common:
   run_label: "run_1"
   log_freq: 500
   auto_resume: true
-  mixed_precision: true
+  mixed_precision: false
   tensorboard_logging: false # enable it if you want to log on tensorboard
   bolt_logging: false # enable it if you want to log on bolt metrics tab. Caution: Bolt interacts weirdly with PyTorch DDP. May result in stalls
 dataset:
-  root_train: "/mnt/imagenet/training" # Please update the location of training set
-  root_val: "/mnt/imagenet/validation" # Please update the location of validation set
+  root_train: "/home/sebastian/Documents/Uni/Master/datasets/imagenet/val" # Please update the location of training set
+  root_val: "/home/sebastian/Documents/Uni/Master/datasets/imagenet/val" # Please update the location of validation set
   name: "imagenet_opencv"
   category: "classification"
   train_batch_size0: 128 # In our experiments, we used an effective batch size of 1024 (128 images/GPU * 8 GPUs)
   val_batch_size0: 100
   eval_batch_size0: 100
-  workers: 8
+  workers: 1
   persistent_workers: true
   pin_memory: true
 # Note that MobileViT is trained using OpenCV while the current CVNets version uses PIL. For training MobileViT models,
@@ -61,7 +61,7 @@ model:
     name: "mobilevit"
     classifier_dropout: 0.1
     mit:
-      mode: "small"
+      mode: "xx_small"
       ffn_dropout: 0.0
       attn_dropout: 0.0
       dropout: 0.1
