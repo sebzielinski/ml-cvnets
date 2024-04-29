@@ -20,6 +20,8 @@ from ..layers import (
 from ..modules import BaseModule
 from ..misc.profiler import module_profile
 
+from utils.save_tensor import save_tensor_to_hpp
+
 
 class TransformerEncoder(BaseModule):
     """
@@ -128,7 +130,9 @@ class TransformerEncoder(BaseModule):
 
         # Multi-head attention
         res = x
+        save_tensor_to_hpp(x, "", "input_debug.l3_prenorm_0.hpp", "input")
         x = self.pre_norm_mha[0](x)  # norm
+        save_tensor_to_hpp(x, "", "output_debug.l3_prenorm_0.hpp", "output")
         x = self.pre_norm_mha[1](x_q=x, x_kv=x_prev)  # mha
         x = self.pre_norm_mha[2](x)  # dropout
         x = x + res
